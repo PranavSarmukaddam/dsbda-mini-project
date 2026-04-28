@@ -226,3 +226,90 @@ h1, h2, h3, h4, h5, h6 {
   color: #6d665a;
   font-weight: 600;
 }
+
+/* Forms & Filters */
+.filters-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.filters-container select {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+select, input {
+  padding: 0.6rem 1rem;
+  border: 1px solid #d1cbbb;
+  border-radius: 4px;
+  background-color: white;
+  color: #3b3631;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  outline: none;
+}
+select:focus, input:focus {
+  border-color: #8d9f8e;
+}
+
+.risk-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 8px;
+  border: 1px solid #e0ddd0;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #6d665a;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.calc-btn {
+  grid-column: 1 / -1;
+  background-color: #4a453f;
+  color: #f7f5ef;
+  border: none;
+  padding: 1.2rem;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1rem;
+}
+.calc-btn:hover { background-color: #3b3631; }
+
+.risk-result {
+  margin-top: 2rem;
+  padding: 3rem;
+  background: white;
+  border-radius: 8px;
+  border: 2px solid #e0ddd0;
+  text-align: center;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+.risk-result h3 { font-size: 1.8rem; color: #3b3631; margin-bottom: 1rem; }
+.risk-score-display { 
+  font-size: 4rem; 
+  font-weight: 800; 
+  font-family: 'Space Grotesk', sans-serif;
+  display: inline-block;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,501 @@
+age,sex,cp,trestbps,chol,fbs,thalach,target,sex_label,cp_label,target_label,age_group
+58,1,4,112,262,0,193,1,Male,Asymptomatic,Heart Disease,56-65
+52,1,1,94,314,1,171,1,Male,Typical Angina,Heart Disease,45-55
+59,1,4,137,150,0,154,1,Male,Asymptomatic,Heart Disease,56-65
+67,1,2,173,251,0,171,0,Male,Atypical Angina,Healthy,>65
+51,1,3,130,237,0,152,0,Male,Non-anginal Pain,Healthy,45-55
+51,0,4,145,280,0,149,1,Female,Asymptomatic,Heart Disease,45-55
+68,0,2,132,256,0,141,0,Female,Atypical Angina,Healthy,>65
+60,0,4,129,207,0,183,1,Female,Asymptomatic,Heart Disease,56-65
+49,0,4,146,229,0,130,1,Female,Asymptomatic,Heart Disease,45-55
+58,0,3,126,205,0,182,0,Female,Non-anginal Pain,Healthy,56-65
+49,0,1,135,300,0,159,0,Female,Typical Angina,Healthy,45-55
+49,0,3,136,247,0,118,0,Female,Non-anginal Pain,Healthy,45-55
+56,0,4,119,342,1,157,1,Female,Asymptomatic,Heart Disease,56-65
+36,1,4,147,242,0,102,1,Male,Asymptomatic,Heart Disease,<45
+38,0,4,128,209,0,162,0,Female,Asymptomatic,Healthy,<45
+48,1,3,118,168,0,168,0,Male,Non-anginal Pain,Healthy,45-55
+44,1,4,140,154,0,135,1,Male,Asymptomatic,Heart Disease,<45
+56,1,4,115,165,0,151,1,Male,Asymptomatic,Heart Disease,56-65
+45,0,4,131,259,0,191,0,Female,Asymptomatic,Healthy,<45
+41,1,2,130,271,0,137,0,Male,Atypical Angina,Healthy,<45
+67,1,4,149,165,0,125,1,Male,Asymptomatic,Heart Disease,>65
+51,1,4,139,291,0,181,1,Male,Asymptomatic,Heart Disease,45-55
+54,1,4,130,221,0,192,1,Male,Asymptomatic,Heart Disease,45-55
+41,0,3,144,253,1,149,0,Female,Non-anginal Pain,Healthy,<45
+49,0,4,154,328,0,171,0,Female,Asymptomatic,Healthy,45-55
+54,1,4,140,291,0,178,1,Male,Asymptomatic,Heart Disease,45-55
+43,1,2,131,232,0,132,0,Male,Atypical Angina,Healthy,<45
+57,1,4,108,200,0,138,1,Male,Asymptomatic,Heart Disease,56-65
+48,1,4,112,136,1,176,0,Male,Asymptomatic,Healthy,45-55
+51,0,1,125,209,0,186,0,Female,Typical Angina,Healthy,45-55
+48,1,3,120,235,0,161,0,Male,Non-anginal Pain,Healthy,45-55
+70,0,4,127,195,1,129,1,Female,Asymptomatic,Heart Disease,>65
+53,1,1,131,239,0,192,0,Male,Typical Angina,Healthy,45-55
+44,1,4,140,249,0,137,1,Male,Asymptomatic,Heart Disease,<45
+61,1,3,129,234,0,141,1,Male,Non-anginal Pain,Heart Disease,56-65
+43,0,4,139,212,0,156,0,Female,Asymptomatic,Healthy,<45
+55,0,1,132,254,0,183,0,Female,Typical Angina,Healthy,45-55
+36,1,4,97,268,1,167,1,Male,Asymptomatic,Heart Disease,<45
+42,0,4,115,190,1,158,0,Female,Asymptomatic,Healthy,<45
+55,1,4,128,317,0,159,1,Male,Asymptomatic,Heart Disease,45-55
+60,0,4,110,240,0,149,0,Female,Asymptomatic,Healthy,56-65
+55,1,2,141,246,0,161,1,Male,Atypical Angina,Heart Disease,45-55
+52,1,4,157,282,1,93,1,Male,Asymptomatic,Heart Disease,45-55
+51,0,1,151,257,0,142,0,Female,Typical Angina,Healthy,45-55
+40,1,1,127,294,0,154,0,Male,Typical Angina,Healthy,<45
+47,0,3,156,260,0,123,0,Female,Non-anginal Pain,Healthy,45-55
+49,0,3,133,214,0,157,0,Female,Non-anginal Pain,Healthy,45-55
+63,1,4,125,264,0,144,0,Male,Asymptomatic,Healthy,56-65
+57,1,4,120,187,0,187,1,Male,Asymptomatic,Heart Disease,56-65
+38,1,3,125,251,0,183,0,Male,Non-anginal Pain,Healthy,<45
+56,0,3,124,244,0,138,0,Female,Non-anginal Pain,Healthy,56-65
+50,1,4,133,235,0,145,1,Male,Asymptomatic,Heart Disease,45-55
+47,1,3,133,239,0,147,0,Male,Non-anginal Pain,Healthy,45-55
+59,1,3,131,150,1,139,0,Male,Non-anginal Pain,Healthy,56-65
+63,1,2,138,218,0,153,0,Male,Atypical Angina,Healthy,56-65
+62,1,4,151,250,0,132,1,Male,Asymptomatic,Heart Disease,56-65
+46,1,4,147,254,0,124,1,Male,Asymptomatic,Heart Disease,45-55
+51,1,2,105,193,0,162,1,Male,Atypical Angina,Heart Disease,45-55
+56,1,2,94,310,0,162,0,Male,Atypical Angina,Healthy,56-65
+62,1,4,146,201,1,131,1,Male,Asymptomatic,Heart Disease,56-65
+49,0,4,107,295,0,168,0,Female,Asymptomatic,Healthy,45-55
+52,1,3,127,267,0,135,1,Male,Non-anginal Pain,Heart Disease,45-55
+44,1,4,111,213,0,154,1,Male,Asymptomatic,Heart Disease,<45
+43,0,2,100,336,1,167,0,Female,Atypical Angina,Healthy,<45
+61,0,3,140,185,0,148,0,Female,Non-anginal Pain,Healthy,56-65
+66,1,4,143,292,0,159,1,Male,Asymptomatic,Heart Disease,>65
+53,1,3,121,297,0,137,0,Male,Non-anginal Pain,Healthy,45-55
+63,1,4,94,211,0,144,1,Male,Asymptomatic,Heart Disease,56-65
+57,0,3,121,317,0,144,0,Female,Non-anginal Pain,Healthy,56-65
+48,1,3,137,233,1,132,0,Male,Non-anginal Pain,Healthy,45-55
+57,0,4,105,260,0,145,1,Female,Asymptomatic,Heart Disease,56-65
+67,0,3,134,259,0,114,0,Female,Non-anginal Pain,Healthy,>65
+53,0,4,130,239,0,138,0,Female,Asymptomatic,Healthy,45-55
+68,1,2,140,287,1,142,1,Male,Atypical Angina,Heart Disease,>65
+30,1,2,133,286,0,143,0,Male,Atypical Angina,Healthy,<45
+61,1,1,114,156,0,143,0,Male,Typical Angina,Healthy,56-65
+54,1,4,151,312,0,147,1,Male,Asymptomatic,Heart Disease,45-55
+51,1,3,128,161,0,159,0,Male,Non-anginal Pain,Healthy,45-55
+54,1,4,130,298,0,168,1,Male,Asymptomatic,Heart Disease,45-55
+36,1,3,115,303,0,134,0,Male,Non-anginal Pain,Healthy,<45
+52,1,4,123,190,1,122,0,Male,Asymptomatic,Healthy,45-55
+57,1,2,115,225,0,126,1,Male,Atypical Angina,Heart Disease,56-65
+67,1,4,128,189,0,138,0,Male,Asymptomatic,Healthy,>65
+49,0,4,160,235,0,141,1,Female,Asymptomatic,Heart Disease,45-55
+46,1,4,107,230,0,132,1,Male,Asymptomatic,Heart Disease,45-55
+49,1,4,103,285,0,120,1,Male,Asymptomatic,Heart Disease,45-55
+62,0,4,156,312,0,138,0,Female,Asymptomatic,Healthy,56-65
+56,1,4,127,317,0,152,1,Male,Asymptomatic,Heart Disease,56-65
+49,1,2,119,217,0,162,1,Male,Atypical Angina,Heart Disease,45-55
+58,1,1,148,235,0,136,0,Male,Typical Angina,Healthy,56-65
+54,1,4,120,160,0,139,1,Male,Asymptomatic,Heart Disease,45-55
+62,1,4,162,204,0,128,1,Male,Asymptomatic,Heart Disease,56-65
+47,0,4,142,295,0,148,0,Female,Asymptomatic,Healthy,45-55
+51,1,3,122,328,0,130,0,Male,Non-anginal Pain,Healthy,45-55
+50,1,2,167,183,0,161,1,Male,Atypical Angina,Heart Disease,45-55
+40,1,2,120,215,0,109,0,Male,Atypical Angina,Healthy,<45
+56,0,4,143,244,0,141,0,Female,Asymptomatic,Healthy,56-65
+56,1,3,136,260,0,155,1,Male,Non-anginal Pain,Heart Disease,56-65
+54,1,2,153,204,0,153,0,Male,Atypical Angina,Healthy,45-55
+51,1,3,157,267,0,202,0,Male,Non-anginal Pain,Healthy,45-55
+41,1,1,131,221,1,156,0,Male,Typical Angina,Healthy,<45
+50,1,4,118,245,0,126,1,Male,Asymptomatic,Heart Disease,45-55
+50,0,3,138,273,0,146,0,Female,Non-anginal Pain,Healthy,45-55
+46,0,4,119,246,0,109,1,Female,Asymptomatic,Heart Disease,45-55
+52,0,3,165,223,0,147,0,Female,Non-anginal Pain,Healthy,45-55
+57,1,3,133,240,0,130,0,Male,Non-anginal Pain,Healthy,56-65
+70,0,1,124,241,0,169,0,Female,Typical Angina,Healthy,>65
+55,1,1,134,227,0,136,0,Male,Typical Angina,Healthy,45-55
+56,1,3,108,232,0,146,0,Male,Non-anginal Pain,Healthy,56-65
+53,1,3,114,327,0,135,0,Male,Non-anginal Pain,Healthy,45-55
+36,1,4,151,274,0,187,1,Male,Asymptomatic,Heart Disease,<45
+53,1,3,119,230,1,141,0,Male,Non-anginal Pain,Healthy,45-55
+54,0,4,113,281,0,189,0,Female,Asymptomatic,Healthy,45-55
+76,1,4,140,228,0,166,1,Male,Asymptomatic,Heart Disease,>65
+52,0,4,151,305,0,159,1,Female,Asymptomatic,Heart Disease,45-55
+56,1,1,143,264,1,157,0,Male,Typical Angina,Healthy,56-65
+53,1,3,147,240,0,157,1,Male,Non-anginal Pain,Heart Disease,45-55
+43,0,2,118,268,0,106,1,Female,Atypical Angina,Heart Disease,<45
+64,0,3,106,165,0,142,0,Female,Non-anginal Pain,Healthy,56-65
+60,1,4,156,188,0,167,1,Male,Asymptomatic,Heart Disease,56-65
+61,1,2,125,185,0,147,0,Male,Atypical Angina,Healthy,56-65
+45,1,3,126,253,0,118,0,Male,Non-anginal Pain,Healthy,<45
+66,1,4,153,334,0,147,1,Male,Asymptomatic,Heart Disease,>65
+41,1,4,140,359,0,186,1,Male,Asymptomatic,Heart Disease,<45
+59,0,4,138,278,0,176,1,Female,Asymptomatic,Heart Disease,56-65
+73,1,1,167,271,0,147,0,Male,Typical Angina,Healthy,>65
+45,0,3,120,154,0,169,0,Female,Non-anginal Pain,Healthy,<45
+48,1,3,146,218,0,140,0,Male,Non-anginal Pain,Healthy,45-55
+54,1,2,131,205,0,111,1,Male,Atypical Angina,Heart Disease,45-55
+49,1,3,135,214,1,128,0,Male,Non-anginal Pain,Healthy,45-55
+40,1,1,156,237,0,183,1,Male,Typical Angina,Heart Disease,<45
+54,1,1,139,221,0,142,0,Male,Typical Angina,Healthy,45-55
+44,0,3,140,145,0,143,0,Female,Non-anginal Pain,Healthy,<45
+58,1,2,149,284,1,142,0,Male,Atypical Angina,Healthy,56-65
+45,1,4,124,191,0,190,0,Male,Asymptomatic,Healthy,<45
+67,1,4,116,258,0,184,1,Male,Asymptomatic,Heart Disease,>65
+46,0,4,113,351,0,197,0,Female,Asymptomatic,Healthy,45-55
+51,1,2,97,199,0,145,1,Male,Atypical Angina,Heart Disease,45-55
+61,1,2,165,126,0,155,0,Male,Atypical Angina,Healthy,56-65
+42,1,2,112,231,0,115,0,Male,Atypical Angina,Healthy,<45
+56,1,4,127,302,0,181,0,Male,Asymptomatic,Healthy,56-65
+65,1,4,126,345,1,123,1,Male,Asymptomatic,Heart Disease,56-65
+39,1,1,136,183,0,153,0,Male,Typical Angina,Healthy,<45
+55,0,4,144,271,0,124,1,Female,Asymptomatic,Heart Disease,45-55
+56,1,1,145,222,0,136,0,Male,Typical Angina,Healthy,56-65
+61,1,4,121,240,0,130,1,Male,Asymptomatic,Heart Disease,56-65
+42,1,4,128,380,0,135,1,Male,Asymptomatic,Heart Disease,<45
+42,1,4,135,169,0,137,1,Male,Asymptomatic,Heart Disease,<45
+58,1,4,126,258,0,136,1,Male,Asymptomatic,Heart Disease,56-65
+56,1,4,158,269,1,167,1,Male,Asymptomatic,Heart Disease,56-65
+56,1,3,139,301,1,124,0,Male,Non-anginal Pain,Healthy,56-65
+57,0,4,143,250,0,153,1,Female,Asymptomatic,Heart Disease,56-65
+47,1,2,142,261,0,175,0,Male,Atypical Angina,Healthy,45-55
+56,1,4,150,226,1,137,1,Male,Asymptomatic,Heart Disease,56-65
+56,0,4,134,259,0,133,1,Female,Asymptomatic,Heart Disease,56-65
+47,1,4,108,228,1,143,0,Male,Asymptomatic,Healthy,45-55
+70,1,3,137,277,0,174,0,Male,Non-anginal Pain,Healthy,>65
+58,1,4,119,227,0,153,1,Male,Asymptomatic,Heart Disease,56-65
+43,1,4,122,265,0,137,0,Male,Asymptomatic,Healthy,<45
+59,1,4,140,244,0,159,0,Male,Asymptomatic,Healthy,56-65
+45,0,2,152,303,0,124,0,Female,Atypical Angina,Healthy,<45
+61,1,1,131,243,0,163,0,Male,Typical Angina,Healthy,56-65
+64,1,3,136,155,0,157,0,Male,Non-anginal Pain,Healthy,56-65
+46,0,2,159,310,0,142,1,Female,Atypical Angina,Heart Disease,45-55
+62,1,4,135,199,0,130,1,Male,Asymptomatic,Heart Disease,56-65
+57,1,2,175,212,1,129,0,Male,Atypical Angina,Healthy,56-65
+61,1,4,140,215,0,160,1,Male,Asymptomatic,Heart Disease,56-65
+71,1,3,101,316,0,176,0,Male,Non-anginal Pain,Healthy,>65
+51,1,2,143,137,0,134,0,Male,Atypical Angina,Healthy,45-55
+47,1,4,137,406,0,159,0,Male,Asymptomatic,Healthy,45-55
+45,1,4,152,299,1,103,1,Male,Asymptomatic,Heart Disease,<45
+46,1,3,142,257,0,136,1,Male,Non-anginal Pain,Heart Disease,45-55
+53,0,4,128,243,0,148,0,Female,Asymptomatic,Healthy,45-55
+57,1,4,110,260,0,128,1,Male,Asymptomatic,Heart Disease,56-65
+56,0,2,127,272,0,128,0,Female,Atypical Angina,Healthy,56-65
+61,0,4,116,278,0,134,0,Female,Asymptomatic,Healthy,56-65
+54,1,4,121,274,1,155,1,Male,Asymptomatic,Heart Disease,45-55
+67,1,4,141,250,0,144,1,Male,Asymptomatic,Heart Disease,>65
+51,1,2,159,235,0,99,1,Male,Atypical Angina,Heart Disease,45-55
+77,1,4,137,238,0,102,1,Male,Asymptomatic,Heart Disease,>65
+59,1,1,110,236,0,135,0,Male,Typical Angina,Healthy,56-65
+46,1,1,138,303,0,159,0,Male,Typical Angina,Healthy,45-55
+44,0,3,151,276,0,88,0,Female,Non-anginal Pain,Healthy,<45
+58,1,3,120,126,0,138,0,Male,Non-anginal Pain,Healthy,56-65
+51,0,4,128,279,0,137,0,Female,Asymptomatic,Healthy,45-55
+60,1,4,131,255,0,179,1,Male,Asymptomatic,Heart Disease,56-65
+58,0,4,117,245,0,140,1,Female,Asymptomatic,Heart Disease,56-65
+53,1,3,142,226,0,157,0,Male,Non-anginal Pain,Healthy,45-55
+46,0,3,128,303,0,152,0,Female,Non-anginal Pain,Healthy,45-55
+40,1,3,138,294,1,102,0,Male,Non-anginal Pain,Healthy,<45
+49,1,4,115,206,0,165,1,Male,Asymptomatic,Heart Disease,45-55
+61,1,1,123,266,0,153,0,Male,Typical Angina,Healthy,56-65
+55,0,4,143,196,0,160,1,Female,Asymptomatic,Heart Disease,45-55
+42,1,4,124,175,0,202,0,Male,Asymptomatic,Healthy,<45
+55,0,3,160,214,0,103,0,Female,Non-anginal Pain,Healthy,45-55
+57,1,4,124,289,0,186,1,Male,Asymptomatic,Heart Disease,56-65
+46,0,3,134,294,0,142,1,Female,Non-anginal Pain,Heart Disease,45-55
+55,0,4,146,272,0,155,0,Female,Asymptomatic,Healthy,45-55
+54,0,4,106,282,0,147,1,Female,Asymptomatic,Heart Disease,45-55
+43,1,3,101,272,0,139,0,Male,Non-anginal Pain,Healthy,<45
+57,1,3,105,213,0,136,0,Male,Non-anginal Pain,Healthy,56-65
+59,0,4,152,268,0,156,1,Female,Asymptomatic,Heart Disease,56-65
+63,1,4,121,286,1,115,1,Male,Asymptomatic,Heart Disease,56-65
+63,1,2,174,284,0,165,0,Male,Atypical Angina,Healthy,56-65
+41,1,4,121,306,0,139,1,Male,Asymptomatic,Heart Disease,<45
+45,1,4,134,282,0,124,1,Male,Asymptomatic,Heart Disease,<45
+58,1,4,157,263,1,139,1,Male,Asymptomatic,Heart Disease,56-65
+58,1,2,165,300,0,176,1,Male,Atypical Angina,Heart Disease,56-65
+58,0,4,166,244,0,137,0,Female,Asymptomatic,Healthy,56-65
+77,0,4,151,201,0,156,1,Female,Asymptomatic,Heart Disease,>65
+59,1,2,148,237,0,132,1,Male,Atypical Angina,Heart Disease,56-65
+64,1,2,141,208,0,165,0,Male,Atypical Angina,Healthy,56-65
+62,1,4,144,211,0,164,1,Male,Asymptomatic,Heart Disease,56-65
+59,0,2,121,238,0,189,0,Female,Atypical Angina,Healthy,56-65
+51,1,4,117,205,0,145,1,Male,Asymptomatic,Heart Disease,45-55
+60,1,3,130,230,1,163,0,Male,Non-anginal Pain,Healthy,56-65
+47,0,3,128,149,0,151,0,Female,Non-anginal Pain,Healthy,45-55
+51,0,4,123,256,0,177,0,Female,Asymptomatic,Healthy,45-55
+49,1,3,142,246,0,133,0,Male,Non-anginal Pain,Healthy,45-55
+54,1,3,147,204,0,165,0,Male,Non-anginal Pain,Healthy,45-55
+74,0,3,132,279,1,144,0,Female,Non-anginal Pain,Healthy,>65
+37,0,4,156,293,0,147,1,Female,Asymptomatic,Heart Disease,<45
+60,0,2,111,164,0,151,0,Female,Atypical Angina,Healthy,56-65
+39,1,3,127,207,0,154,0,Male,Non-anginal Pain,Healthy,<45
+49,0,4,118,206,0,146,1,Female,Asymptomatic,Heart Disease,45-55
+63,0,3,99,198,0,153,0,Female,Non-anginal Pain,Healthy,56-65
+54,1,4,129,288,0,183,1,Male,Asymptomatic,Heart Disease,45-55
+44,0,3,128,236,0,170,0,Female,Non-anginal Pain,Healthy,<45
+47,1,4,156,232,0,168,1,Male,Asymptomatic,Heart Disease,45-55
+60,0,2,141,143,0,138,0,Female,Atypical Angina,Healthy,56-65
+47,0,4,113,278,1,129,1,Female,Asymptomatic,Heart Disease,45-55
+55,0,3,162,182,0,170,0,Female,Non-anginal Pain,Healthy,45-55
+54,1,2,151,249,0,168,1,Male,Atypical Angina,Heart Disease,45-55
+48,1,1,140,260,0,181,0,Male,Typical Angina,Healthy,45-55
+73,1,2,127,315,0,135,1,Male,Atypical Angina,Heart Disease,>65
+59,1,3,114,179,0,143,0,Male,Non-anginal Pain,Healthy,56-65
+35,1,3,124,126,0,112,0,Male,Non-anginal Pain,Healthy,<45
+55,0,4,149,255,0,140,1,Female,Asymptomatic,Heart Disease,45-55
+48,0,3,163,337,0,170,0,Female,Non-anginal Pain,Healthy,45-55
+61,1,3,157,309,0,138,0,Male,Non-anginal Pain,Healthy,56-65
+46,0,4,122,256,1,163,0,Female,Asymptomatic,Healthy,45-55
+52,0,4,111,220,0,144,1,Female,Asymptomatic,Heart Disease,45-55
+58,0,2,133,287,0,156,0,Female,Atypical Angina,Healthy,56-65
+61,0,2,100,196,0,123,0,Female,Atypical Angina,Healthy,56-65
+43,0,1,136,270,0,150,0,Female,Typical Angina,Healthy,<45
+50,1,4,128,271,0,83,1,Male,Asymptomatic,Heart Disease,45-55
+49,1,4,123,300,0,144,1,Male,Asymptomatic,Heart Disease,45-55
+48,1,3,103,386,0,113,0,Male,Non-anginal Pain,Healthy,45-55
+69,1,4,139,266,0,175,1,Male,Asymptomatic,Heart Disease,>65
+57,1,4,121,220,0,166,0,Male,Asymptomatic,Healthy,56-65
+42,0,4,111,244,0,159,0,Female,Asymptomatic,Healthy,<45
+62,1,4,94,155,1,182,1,Male,Asymptomatic,Heart Disease,56-65
+73,1,2,130,210,0,128,0,Male,Atypical Angina,Healthy,>65
+63,0,2,161,225,0,187,1,Female,Atypical Angina,Heart Disease,56-65
+40,1,3,159,219,0,169,0,Male,Non-anginal Pain,Healthy,<45
+49,1,1,123,253,0,143,0,Male,Typical Angina,Healthy,45-55
+65,1,4,120,204,0,173,1,Male,Asymptomatic,Heart Disease,56-65
+47,1,4,138,303,0,124,1,Male,Asymptomatic,Heart Disease,45-55
+57,0,1,114,246,0,130,0,Female,Typical Angina,Healthy,56-65
+60,1,2,136,245,0,135,1,Male,Atypical Angina,Heart Disease,56-65
+45,1,3,144,229,0,137,0,Male,Non-anginal Pain,Healthy,<45
+53,0,4,151,253,0,125,1,Female,Asymptomatic,Heart Disease,45-55
+29,1,3,129,288,0,175,0,Male,Non-anginal Pain,Healthy,<45
+44,1,3,127,201,0,143,0,Male,Non-anginal Pain,Healthy,<45
+51,1,1,116,212,0,156,0,Male,Typical Angina,Healthy,45-55
+42,1,2,116,230,1,136,0,Male,Atypical Angina,Healthy,<45
+68,1,4,127,177,1,108,1,Male,Asymptomatic,Heart Disease,>65
+41,0,4,137,204,0,154,0,Female,Asymptomatic,Healthy,<45
+50,0,1,146,221,0,106,0,Female,Typical Angina,Healthy,45-55
+55,1,4,117,290,0,147,1,Male,Asymptomatic,Heart Disease,45-55
+66,1,4,156,259,1,118,1,Male,Asymptomatic,Heart Disease,>65
+41,0,4,126,255,1,192,0,Female,Asymptomatic,Healthy,<45
+64,0,3,130,289,0,169,0,Female,Non-anginal Pain,Healthy,56-65
+54,1,3,118,238,0,151,0,Male,Non-anginal Pain,Healthy,45-55
+45,1,3,94,265,0,176,0,Male,Non-anginal Pain,Healthy,<45
+58,1,4,146,240,0,130,0,Male,Asymptomatic,Healthy,56-65
+55,0,2,143,259,0,160,0,Female,Atypical Angina,Healthy,45-55
+48,0,1,126,216,1,153,0,Female,Typical Angina,Healthy,45-55
+54,0,3,132,126,0,154,0,Female,Non-anginal Pain,Healthy,45-55
+50,1,4,139,239,0,176,0,Male,Asymptomatic,Healthy,45-55
+55,0,2,104,318,1,165,0,Female,Atypical Angina,Healthy,45-55
+59,1,4,122,293,0,155,1,Male,Asymptomatic,Heart Disease,56-65
+68,0,4,144,295,0,112,0,Female,Asymptomatic,Healthy,>65
+42,1,2,109,309,0,127,0,Male,Atypical Angina,Healthy,<45
+73,1,4,135,250,0,146,1,Male,Asymptomatic,Heart Disease,>65
+36,1,3,107,256,0,151,0,Male,Non-anginal Pain,Healthy,<45
+52,0,4,138,214,0,124,0,Female,Asymptomatic,Healthy,45-55
+59,0,2,130,229,0,202,0,Female,Atypical Angina,Healthy,56-65
+56,0,4,103,277,0,182,0,Female,Asymptomatic,Healthy,56-65
+48,1,4,150,307,0,162,1,Male,Asymptomatic,Heart Disease,45-55
+52,1,4,118,238,0,150,1,Male,Asymptomatic,Heart Disease,45-55
+49,1,4,117,223,0,144,1,Male,Asymptomatic,Heart Disease,45-55
+48,1,3,134,246,0,128,0,Male,Non-anginal Pain,Healthy,45-55
+61,1,4,150,276,0,150,1,Male,Asymptomatic,Heart Disease,56-65
+57,0,4,113,172,0,154,1,Female,Asymptomatic,Heart Disease,56-65
+47,1,4,132,128,0,121,1,Male,Asymptomatic,Heart Disease,45-55
+62,1,1,138,217,0,156,0,Male,Typical Angina,Healthy,56-65
+56,1,4,142,183,0,145,1,Male,Asymptomatic,Heart Disease,56-65
+61,1,4,133,220,0,107,1,Male,Asymptomatic,Heart Disease,56-65
+59,0,4,124,238,1,130,0,Female,Asymptomatic,Healthy,56-65
+46,0,2,116,222,0,139,0,Female,Atypical Angina,Healthy,45-55
+48,1,4,132,320,0,190,1,Male,Asymptomatic,Heart Disease,45-55
+60,0,3,112,262,0,161,0,Female,Non-anginal Pain,Healthy,56-65
+59,1,4,94,261,0,119,0,Male,Asymptomatic,Healthy,56-65
+53,0,2,138,277,0,159,0,Female,Atypical Angina,Healthy,45-55
+55,1,4,146,187,0,114,1,Male,Asymptomatic,Heart Disease,45-55
+65,0,4,94,298,0,172,1,Female,Asymptomatic,Heart Disease,56-65
+48,1,1,113,242,0,138,0,Male,Typical Angina,Healthy,45-55
+58,1,4,141,280,0,146,1,Male,Asymptomatic,Heart Disease,56-65
+52,0,3,165,191,0,178,0,Female,Non-anginal Pain,Healthy,45-55
+52,1,4,131,166,0,120,1,Male,Asymptomatic,Heart Disease,45-55
+63,1,4,118,287,1,118,0,Male,Asymptomatic,Healthy,56-65
+61,1,4,127,265,0,136,1,Male,Asymptomatic,Heart Disease,56-65
+61,1,4,154,199,0,171,1,Male,Asymptomatic,Heart Disease,56-65
+65,1,4,120,201,0,115,1,Male,Asymptomatic,Heart Disease,56-65
+54,0,3,117,303,0,86,0,Female,Non-anginal Pain,Healthy,45-55
+60,0,3,122,185,0,139,0,Female,Non-anginal Pain,Healthy,56-65
+51,0,4,114,329,0,161,0,Female,Asymptomatic,Healthy,45-55
+56,1,4,133,200,0,175,1,Male,Asymptomatic,Heart Disease,56-65
+52,0,4,158,278,0,138,0,Female,Asymptomatic,Healthy,45-55
+54,1,4,136,229,0,139,1,Male,Asymptomatic,Heart Disease,45-55
+59,1,3,126,276,0,174,1,Male,Non-anginal Pain,Heart Disease,56-65
+46,1,4,126,218,1,107,1,Male,Asymptomatic,Heart Disease,45-55
+72,1,2,104,237,0,140,0,Male,Atypical Angina,Healthy,>65
+44,0,4,146,248,0,153,0,Female,Asymptomatic,Healthy,<45
+43,0,1,129,194,0,158,0,Female,Typical Angina,Healthy,<45
+64,1,3,127,283,0,137,0,Male,Non-anginal Pain,Healthy,56-65
+61,1,3,185,219,0,149,0,Male,Non-anginal Pain,Healthy,56-65
+59,1,3,136,234,0,94,1,Male,Non-anginal Pain,Heart Disease,56-65
+59,1,4,118,195,0,134,1,Male,Asymptomatic,Heart Disease,56-65
+53,0,3,123,126,0,158,0,Female,Non-anginal Pain,Healthy,45-55
+45,1,3,150,236,0,127,0,Male,Non-anginal Pain,Healthy,<45
+54,1,2,132,369,0,150,1,Male,Atypical Angina,Heart Disease,45-55
+47,1,3,106,286,1,158,1,Male,Non-anginal Pain,Heart Disease,45-55
+62,0,2,146,245,0,141,0,Female,Atypical Angina,Healthy,56-65
+52,1,1,119,232,0,152,0,Male,Typical Angina,Healthy,45-55
+46,1,4,162,247,0,127,1,Male,Asymptomatic,Heart Disease,45-55
+51,0,4,149,273,0,144,1,Female,Asymptomatic,Heart Disease,45-55
+57,1,4,123,185,0,162,1,Male,Asymptomatic,Heart Disease,56-65
+48,0,3,152,302,0,152,0,Female,Non-anginal Pain,Healthy,45-55
+46,1,3,132,282,0,136,0,Male,Non-anginal Pain,Healthy,45-55
+56,1,4,145,282,0,153,1,Male,Asymptomatic,Heart Disease,56-65
+56,0,3,139,268,0,164,0,Female,Non-anginal Pain,Healthy,56-65
+49,1,3,116,247,0,103,0,Male,Non-anginal Pain,Healthy,45-55
+49,1,1,120,280,0,174,0,Male,Typical Angina,Healthy,45-55
+56,1,3,148,276,0,141,1,Male,Non-anginal Pain,Heart Disease,56-65
+40,1,3,125,227,0,158,0,Male,Non-anginal Pain,Healthy,<45
+41,1,3,124,216,0,175,0,Male,Non-anginal Pain,Healthy,<45
+47,1,4,114,251,0,118,1,Male,Asymptomatic,Heart Disease,45-55
+52,1,4,138,325,0,133,0,Male,Asymptomatic,Healthy,45-55
+56,0,4,166,182,0,142,1,Female,Asymptomatic,Heart Disease,56-65
+67,1,4,112,171,0,131,1,Male,Asymptomatic,Heart Disease,>65
+61,0,4,131,254,0,187,0,Female,Asymptomatic,Healthy,56-65
+52,1,4,155,248,0,130,1,Male,Asymptomatic,Heart Disease,45-55
+53,1,4,129,254,0,136,1,Male,Asymptomatic,Heart Disease,45-55
+44,0,1,138,258,0,153,0,Female,Typical Angina,Healthy,<45
+53,1,2,112,234,1,122,0,Male,Atypical Angina,Healthy,45-55
+51,1,1,138,321,1,140,0,Male,Typical Angina,Healthy,45-55
+56,0,4,127,164,0,155,1,Female,Asymptomatic,Heart Disease,56-65
+46,1,4,147,203,0,141,1,Male,Asymptomatic,Heart Disease,45-55
+58,1,3,151,240,0,146,0,Male,Non-anginal Pain,Healthy,56-65
+67,0,4,175,162,0,137,1,Female,Asymptomatic,Heart Disease,>65
+53,1,1,140,237,1,115,1,Male,Typical Angina,Heart Disease,45-55
+57,0,4,136,330,0,156,1,Female,Asymptomatic,Heart Disease,56-65
+60,1,3,134,247,0,187,0,Male,Non-anginal Pain,Healthy,56-65
+50,1,2,124,257,1,149,1,Male,Atypical Angina,Heart Disease,45-55
+56,1,3,136,181,0,153,0,Male,Non-anginal Pain,Healthy,56-65
+54,1,3,125,214,0,164,0,Male,Non-anginal Pain,Healthy,45-55
+54,1,3,133,226,1,121,0,Male,Non-anginal Pain,Healthy,45-55
+47,1,3,153,229,0,186,0,Male,Non-anginal Pain,Healthy,45-55
+54,0,4,113,311,0,153,1,Female,Asymptomatic,Heart Disease,45-55
+58,1,4,150,274,0,184,1,Male,Asymptomatic,Heart Disease,56-65
+67,0,3,153,189,0,132,0,Female,Non-anginal Pain,Healthy,>65
+62,1,4,128,258,0,188,1,Male,Asymptomatic,Heart Disease,56-65
+73,0,4,94,271,0,166,0,Female,Asymptomatic,Healthy,>65
+47,0,3,120,304,1,161,0,Female,Non-anginal Pain,Healthy,45-55
+61,0,3,153,326,0,154,0,Female,Non-anginal Pain,Healthy,56-65
+55,1,2,130,194,0,143,0,Male,Atypical Angina,Healthy,45-55
+73,1,2,114,204,0,175,1,Male,Atypical Angina,Heart Disease,>65
+46,1,4,122,181,0,152,1,Male,Asymptomatic,Heart Disease,45-55
+46,0,2,145,234,0,105,1,Female,Atypical Angina,Heart Disease,45-55
+48,0,4,140,269,0,124,0,Female,Asymptomatic,Healthy,45-55
+34,1,4,126,296,0,144,1,Male,Asymptomatic,Heart Disease,<45
+49,1,2,124,242,0,155,0,Male,Atypical Angina,Healthy,45-55
+47,0,4,124,229,0,147,0,Female,Asymptomatic,Healthy,45-55
+55,1,3,115,253,0,175,0,Male,Non-anginal Pain,Healthy,45-55
+57,1,4,158,203,0,106,1,Male,Asymptomatic,Heart Disease,56-65
+70,1,3,125,352,0,152,0,Male,Non-anginal Pain,Healthy,>65
+62,0,4,151,164,0,109,1,Female,Asymptomatic,Heart Disease,56-65
+48,0,4,156,255,0,165,1,Female,Asymptomatic,Heart Disease,45-55
+45,1,1,147,349,0,146,1,Male,Typical Angina,Heart Disease,<45
+58,0,4,123,246,0,158,0,Female,Asymptomatic,Healthy,56-65
+42,1,4,137,236,0,129,1,Male,Asymptomatic,Heart Disease,<45
+70,1,4,130,227,0,177,1,Male,Asymptomatic,Heart Disease,>65
+64,1,4,115,236,0,171,1,Male,Asymptomatic,Heart Disease,56-65
+49,1,4,136,316,0,161,1,Male,Asymptomatic,Heart Disease,45-55
+38,1,2,110,133,0,146,0,Male,Atypical Angina,Healthy,<45
+66,1,2,151,324,0,161,0,Male,Atypical Angina,Healthy,>65
+52,1,4,123,173,0,133,1,Male,Asymptomatic,Heart Disease,45-55
+65,1,3,134,232,0,167,0,Male,Non-anginal Pain,Healthy,56-65
+39,1,4,135,224,0,185,1,Male,Asymptomatic,Heart Disease,<45
+48,1,4,126,276,0,172,1,Male,Asymptomatic,Heart Disease,45-55
+54,1,3,140,164,0,132,0,Male,Non-anginal Pain,Healthy,45-55
+54,1,2,122,269,0,156,0,Male,Atypical Angina,Healthy,45-55
+49,1,4,145,349,0,120,1,Male,Asymptomatic,Heart Disease,45-55
+59,1,3,108,176,0,161,0,Male,Non-anginal Pain,Healthy,56-65
+44,1,4,133,255,0,158,0,Male,Asymptomatic,Healthy,<45
+52,1,3,163,212,0,107,0,Male,Non-anginal Pain,Healthy,45-55
+55,0,4,113,267,1,123,1,Female,Asymptomatic,Heart Disease,45-55
+58,0,2,119,246,0,142,0,Female,Atypical Angina,Healthy,56-65
+60,1,4,139,213,1,142,1,Male,Asymptomatic,Heart Disease,56-65
+43,0,3,134,270,0,122,0,Female,Non-anginal Pain,Healthy,<45
+40,0,4,136,338,0,157,1,Female,Asymptomatic,Heart Disease,<45
+65,0,2,139,236,0,154,0,Female,Atypical Angina,Healthy,56-65
+56,0,4,141,282,1,144,0,Female,Asymptomatic,Healthy,56-65
+47,0,4,149,180,0,132,0,Female,Asymptomatic,Healthy,45-55
+67,1,2,137,197,0,172,1,Male,Atypical Angina,Heart Disease,>65
+55,1,2,126,270,0,185,0,Male,Atypical Angina,Healthy,45-55
+64,1,1,142,321,0,138,0,Male,Typical Angina,Healthy,56-65
+54,1,4,163,264,0,135,1,Male,Asymptomatic,Heart Disease,45-55
+72,0,4,128,230,0,159,0,Female,Asymptomatic,Healthy,>65
+69,1,4,114,245,0,141,1,Male,Asymptomatic,Heart Disease,>65
+51,1,2,149,182,0,145,1,Male,Atypical Angina,Heart Disease,45-55
+62,0,3,128,276,0,165,0,Female,Non-anginal Pain,Healthy,56-65
+59,1,4,94,290,0,106,1,Male,Asymptomatic,Heart Disease,56-65
+66,1,3,145,222,0,178,0,Male,Non-anginal Pain,Healthy,>65
+45,1,4,121,222,1,150,0,Male,Asymptomatic,Healthy,<45
+60,1,2,129,259,0,139,0,Male,Atypical Angina,Healthy,56-65
+63,1,4,136,223,0,147,1,Male,Asymptomatic,Heart Disease,56-65
+38,0,3,134,242,0,148,0,Female,Non-anginal Pain,Healthy,<45
+43,1,3,143,353,0,110,0,Male,Non-anginal Pain,Healthy,<45
+35,0,4,123,233,0,181,0,Female,Asymptomatic,Healthy,<45
+51,1,4,139,227,0,149,1,Male,Asymptomatic,Heart Disease,45-55
+60,1,4,126,212,0,158,1,Male,Asymptomatic,Heart Disease,56-65
+67,1,2,143,283,0,169,0,Male,Atypical Angina,Healthy,>65
+54,1,2,141,236,0,126,0,Male,Atypical Angina,Healthy,45-55
+68,0,4,115,212,0,159,1,Female,Asymptomatic,Heart Disease,>65
+41,0,4,149,313,0,143,1,Female,Asymptomatic,Heart Disease,<45
+38,0,3,121,318,1,167,0,Female,Non-anginal Pain,Healthy,<45
+53,0,1,144,215,0,102,0,Female,Typical Angina,Healthy,45-55
+57,1,2,137,150,0,146,0,Male,Atypical Angina,Healthy,56-65
+53,1,4,162,297,0,135,1,Male,Asymptomatic,Heart Disease,45-55
+35,0,2,127,211,0,158,0,Female,Atypical Angina,Healthy,<45
+53,1,3,125,286,0,159,0,Male,Non-anginal Pain,Healthy,45-55
+42,1,2,130,145,0,133,0,Male,Atypical Angina,Healthy,<45
+60,1,3,125,291,0,133,0,Male,Non-anginal Pain,Healthy,56-65
+57,1,1,144,184,0,146,0,Male,Typical Angina,Healthy,56-65
+45,0,3,103,283,0,129,0,Female,Non-anginal Pain,Healthy,<45
+49,1,1,113,246,0,167,0,Male,Typical Angina,Healthy,45-55
+44,1,4,112,197,0,140,1,Male,Asymptomatic,Heart Disease,<45
+53,1,2,147,225,0,85,1,Male,Atypical Angina,Heart Disease,45-55
+62,0,4,160,281,0,140,0,Female,Asymptomatic,Healthy,56-65
+45,1,4,129,251,0,126,1,Male,Asymptomatic,Heart Disease,<45
+58,0,4,128,275,0,113,1,Female,Asymptomatic,Heart Disease,56-65
+49,0,4,132,346,0,121,1,Female,Asymptomatic,Heart Disease,45-55
+46,1,3,150,166,0,151,0,Male,Non-anginal Pain,Healthy,45-55
+53,1,3,115,328,0,178,0,Male,Non-anginal Pain,Healthy,45-55
+44,1,4,135,251,0,155,1,Male,Asymptomatic,Heart Disease,<45
+49,0,4,147,200,0,135,0,Female,Asymptomatic,Healthy,45-55
+43,1,4,139,178,1,159,0,Male,Asymptomatic,Healthy,<45
+71,0,4,134,236,0,138,1,Female,Asymptomatic,Heart Disease,>65
+54,0,4,148,293,0,133,1,Female,Asymptomatic,Heart Disease,45-55
+47,1,3,94,239,0,123,1,Male,Non-anginal Pain,Heart Disease,45-55
+55,1,1,142,323,0,110,0,Male,Typical Angina,Healthy,45-55
+52,1,4,119,171,0,140,1,Male,Asymptomatic,Heart Disease,45-55
+52,1,4,99,245,1,152,1,Male,Asymptomatic,Heart Disease,45-55
+59,1,2,139,182,1,146,0,Male,Atypical Angina,Healthy,56-65
+60,1,4,154,264,0,139,1,Male,Asymptomatic,Heart Disease,56-65
+49,0,2,128,291,1,128,0,Female,Atypical Angina,Healthy,45-55
+48,1,4,147,224,1,162,1,Male,Asymptomatic,Heart Disease,45-55
+51,1,2,158,126,0,120,0,Male,Atypical Angina,Healthy,45-55
+33,0,3,153,256,0,166,0,Female,Non-anginal Pain,Healthy,<45
+40,1,4,158,268,0,126,1,Male,Asymptomatic,Heart Disease,<45
+66,1,3,143,266,0,132,0,Male,Non-anginal Pain,Healthy,>65
+68,0,4,132,309,0,116,1,Female,Asymptomatic,Heart Disease,>65
+51,0,4,103,191,0,137,0,Female,Asymptomatic,Healthy,45-55
+59,1,4,126,280,1,170,1,Male,Asymptomatic,Heart Disease,56-65
+56,0,2,116,306,0,160,0,Female,Atypical Angina,Healthy,56-65
+77,1,3,167,155,0,170,0,Male,Non-anginal Pain,Healthy,>65
+64,1,2,128,262,0,160,0,Male,Atypical Angina,Healthy,56-65
+52,1,4,133,220,1,124,1,Male,Asymptomatic,Heart Disease,45-55
+45,1,4,140,241,1,141,1,Male,Asymptomatic,Heart Disease,<45
+39,1,4,131,263,0,131,1,Male,Asymptomatic,Heart Disease,<45
+55,1,4,159,221,0,178,1,Male,Asymptomatic,Heart Disease,45-55
+47,1,4,120,211,0,122,1,Male,Asymptomatic,Heart Disease,45-55
+41,1,4,134,247,0,168,1,Male,Asymptomatic,Heart Disease,<45
+48,0,2,118,190,0,168,0,Female,Atypical Angina,Healthy,45-55
+44,1,4,108,190,0,189,1,Male,Asymptomatic,Heart Disease,<45
+69,1,2,120,280,0,139,1,Male,Atypical Angina,Heart Disease,>65
+61,1,4,130,187,0,164,1,Male,Asymptomatic,Heart Disease,56-65
+53,1,4,123,279,0,199,1,Male,Asymptomatic,Heart Disease,45-55
+67,1,4,119,269,0,135,1,Male,Asymptomatic,Heart Disease,>65
+54,1,1,107,157,0,115,0,Male,Typical Angina,Healthy,45-55
+46,1,3,129,211,0,107,0,Male,Non-anginal Pain,Healthy,45-55
+67,1,3,105,306,0,164,0,Male,Non-anginal Pain,Healthy,>65
+58,1,3,143,195,0,107,0,Male,Non-anginal Pain,Healthy,56-65
+44,1,2,132,222,0,140,0,Male,Atypical Angina,Healthy,<45
+52,1,4,106,269,0,158,1,Male,Asymptomatic,Heart Disease,45-55
+46,0,4,125,285,0,153,1,Female,Asymptomatic,Heart Disease,45-55
+41,1,3,118,233,0,158,1,Male,Non-anginal Pain,Heart Disease,<45

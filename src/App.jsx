@@ -11,17 +11,31 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell,
-  LabelList
+  Cell
 } from 'recharts';
 
 export default function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('dataset');
+  const [activeTab, setActiveTab] = useState('overview');
+
+  // Global Filters
+  const [genderFilter, setGenderFilter] = useState('All');
+  const [ageFilter, setAgeFilter] = useState('All');
+
+  // Risk Calculator State
+  const [calcValues, setCalcValues] = useState({
+    age: 50,
+    sex: '1',
+    cp: '1',
+    trestbps: 120,
+    chol: 200,
+    thalach: 150
+  });
+  const [riskScore, setRiskScore] = useState(null);
 
   useEffect(() => {
-    Papa.parse('/covid_vaccine_statewise.csv', {
+    Papa.parse('/heart_disease.csv', {
       download: true,
       header: true,
       skipEmptyLines: true,
@@ -36,325 +50,471 @@ export default function App() {
   const processedData = useMemo(() => {
     if (!data.length) return null;
 
-    const stateMaxMap = new Map();
-
-    data.forEach((row) => {
-      const state = row.State;
-      if (!state) return;
-
-      const firstDose = parseFloat(row['First Dose Administered']) || 0;
-      const secondDose = parseFloat(row['Second Dose Administered']) || 0;
-      
-      const male1 = parseFloat(row['Male (Doses Administered)']) || 0;
-      const male2 = parseFloat(row['Male(Individuals Vaccinated)']) || 0;
-      const male = Math.max(male1, male2);
-
-      const female1 = parseFloat(row['Female (Doses Administered)']) || 0;
-      const female2 = parseFloat(row['Female(Individuals Vaccinated)']) || 0;
-      const female = Math.max(female1, female2);
-
-      const covaxin = parseFloat(row['Covaxin (Doses Administered)']) || 0;
-      const covishield = parseFloat(row['CoviShield (Doses Administered)']) || 0;
-      const sputnik = parseFloat(row['Sputnik V (Doses Administered)']) || 0;
-
-      const age1D = parseFloat(row['18-44 Years (Doses Administered)']) || 0;
-      const age1I = parseFloat(row['18-44 Years(Individuals Vaccinated)']) || 0;
-      const age18_44 = Math.max(age1D, age1I);
-
-      const age2D = parseFloat(row['45-60 Years (Doses Administered)']) || 0;
-      const age2I = parseFloat(row['45-60 Years(Individuals Vaccinated)']) || 0;
-      const age45_60 = Math.max(age2D, age2I);
-
-      const age3D = parseFloat(row['60+ Years (Doses Administered)']) || 0;
-      const age3I = parseFloat(row['60+ Years(Individuals Vaccinated)']) || 0;
-      const age60plus = Math.max(age3D, age3I);
-
-      // Extract Sessions and Sites natively from rows across all dates
-      const sessions = parseFloat(row['Sessions']) || 0;
-      const sites = parseFloat(row['Sites']) || 0;
-
-      if (!stateMaxMap.has(state)) {
-        stateMaxMap.set(state, {
-          state, firstDose, secondDose, male, female,
-          covaxin, covishield, sputnik, age18_44, age45_60, age60plus,
-          sessions, sites
-        });
-      } else {
-        const current = stateMaxMap.get(state);
-        stateMaxMap.set(state, {
-          state,
-          firstDose: Math.max(current.firstDose, firstDose),
-          secondDose: Math.max(current.secondDose, secondDose),
-          male: Math.max(current.male, male),
-          female: Math.max(current.female, female),
-          covaxin: Math.max(current.covaxin, covaxin),
-          covishield: Math.max(current.covishield, covishield),
-          sputnik: Math.max(current.sputnik, sputnik),
-          age18_44: Math.max(current.age18_44, age18_44),
-          age45_60: Math.max(current.age45_60, age45_60),
-          age60plus: Math.max(current.age60plus, age60plus),
-          sessions: Math.max(current.sessions, sessions),
-          sites: Math.max(current.sites, sites)
-        });
-      }
+    // Apply Global Filters
+    const filteredData = data.filter(row => {
+      const genderMatch = genderFilter === 'All' || row.sex_label === genderFilter;
+      const ageMatch = ageFilter === 'All' || row.age_group === ageFilter;
+      return genderMatch && ageMatch;
     });
 
-    const indiaTotal = stateMaxMap.get('India');
-    stateMaxMap.delete('India');
+    let totalPatients = filteredData.length;
+    if (totalPatients === 0) return { totalPatients: 0 };
+
+    let heartDiseaseCount = 0;
+    let sumAge = 0;
+    let sumChol = 0;
+    let sumTrestbps = 0;
+    let sumThalach = 0;
+
+    let maleCount = 0;
+    let femaleCount = 0;
+    let maleDisease = 0;
+    let femaleDisease = 0;
+
+    const ageGroupCounts = { '<45': 0, '45-55': 0, '56-65': 0, '>65': 0 };
+    const ageGroupDisease = { '<45': 0, '45-55': 0, '56-65': 0, '>65': 0 };
     
-    const stateDataValid = Array.from(stateMaxMap.values())
-      .filter(s => s.firstDose > 0)
-      .sort((a, b) => b.firstDose - a.firstDose);
+    const cpCounts = { 'Typical Angina': 0, 'Atypical Angina': 0, 'Non-anginal Pain': 0, 'Asymptomatic': 0 };
+    const cpDisease = { 'Typical Angina': 0, 'Atypical Angina': 0, 'Non-anginal Pain': 0, 'Asymptomatic': 0 };
+
+    const fbsCounts = { 'Normal (<=120)': 0, 'High (>120)': 0 };
+    const fbsDisease = { 'Normal (<=120)': 0, 'High (>120)': 0 };
+
+    filteredData.forEach(row => {
+      const target = parseInt(row.target);
+      const age = parseInt(row.age);
+      const chol = parseInt(row.chol);
+      const trestbps = parseInt(row.trestbps);
+      const thalach = parseInt(row.thalach);
+      
+      sumAge += age;
+      sumChol += chol;
+      sumTrestbps += trestbps;
+      sumThalach += thalach;
+
+      if (target === 1) heartDiseaseCount++;
+
+      if (row.sex_label === 'Male') {
+        maleCount++;
+        if (target === 1) maleDisease++;
+      } else {
+        femaleCount++;
+        if (target === 1) femaleDisease++;
+      }
+
+      if (row.age_group in ageGroupCounts) {
+        ageGroupCounts[row.age_group]++;
+        if (target === 1) ageGroupDisease[row.age_group]++;
+      }
+
+      if (row.cp_label in cpCounts) {
+        cpCounts[row.cp_label]++;
+        if (target === 1) cpDisease[row.cp_label]++;
+      }
+
+      const fbsLabel = row.fbs == 1 ? 'High (>120)' : 'Normal (<=120)';
+      fbsCounts[fbsLabel]++;
+      if (target === 1) fbsDisease[fbsLabel]++;
+    });
+
+    const ageData = Object.keys(ageGroupCounts).map(group => ({
+      group,
+      'Healthy': ageGroupCounts[group] - ageGroupDisease[group],
+      'Heart Disease': ageGroupDisease[group]
+    }));
+
+    const cpData = Object.keys(cpCounts).map(type => ({
+      type,
+      'Healthy': cpCounts[type] - cpDisease[type],
+      'Heart Disease': cpDisease[type]
+    }));
+
+    const fbsData = Object.keys(fbsCounts).map(type => ({
+      type,
+      'Healthy': fbsCounts[type] - fbsDisease[type],
+      'Heart Disease': fbsDisease[type]
+    }));
 
     return {
-      totalRows: data.length,
-      nationalTotals: indiaTotal,
-      allStates: stateDataValid,
+      totalPatients,
+      heartDiseaseCount,
+      avgAge: Math.round(sumAge / totalPatients),
+      avgChol: Math.round(sumChol / totalPatients),
+      avgTrestbps: Math.round(sumTrestbps / totalPatients),
+      avgThalach: Math.round(sumThalach / totalPatients),
+      maleCount,
+      femaleCount,
+      maleDisease,
+      femaleDisease,
+      ageData,
+      cpData,
+      fbsData
     };
-  }, [data]);
+  }, [data, genderFilter, ageFilter]);
 
-  const handleDownload = (e) => {
+  const calculateRisk = (e) => {
     e.preventDefault();
-    const link = document.createElement('a');
-    link.href = '/covid_vaccine_statewise.csv';
-    link.download = 'covid_vaccine_statewise.csv';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const { age, sex, cp, trestbps, chol, thalach } = calcValues;
+    let score = 5; // Base risk
+    
+    if (age > 50) score += 15;
+    if (age > 60) score += 10;
+    
+    if (sex === '1') score += 10;
+    
+    if (cp === '1') score += 15;
+    if (cp === '4') score += 30;
+    
+    if (trestbps > 130) score += 10;
+    if (trestbps > 140) score += 10;
+    
+    if (chol > 200) score += 10;
+    if (chol > 240) score += 10;
+    
+    if (thalach < 140) score += 15;
+    if (thalach < 120) score += 10;
+
+    score = Math.min(score, 95); 
+    setRiskScore(score);
+  };
+
+  const handleCalcChange = (e) => {
+    const { name, value } = e.target;
+    setCalcValues(prev => ({ ...prev, [name]: value }));
+  };
+
+  const getRiskColor = (score) => {
+    if (score < 30) return '#637f64'; // Green
+    if (score < 60) return '#e0c9a3'; // Yellow/Tan
+    return '#b76c5b'; // Red
   };
 
   if (loading) {
-    return <div className="loader">Analyzing dataset numbers...</div>;
+    return <div className="loader">Analyzing clinical data...</div>;
   }
 
-  if (!processedData || !processedData.nationalTotals) {
-    return <div className="loader">Failed to parse data properly.</div>;
-  }
+  if (!processedData) return <div className="loader">Error loading data.</div>;
 
-  const { nationalTotals, allStates, totalRows } = processedData;
+  const { 
+    totalPatients, heartDiseaseCount, avgAge, avgChol, avgTrestbps,
+    maleCount, femaleCount, maleDisease, femaleDisease, ageData, cpData, fbsData 
+  } = processedData;
 
   const genderData = [
-    { name: 'Male', value: nationalTotals.male },
-    { name: 'Female', value: nationalTotals.female },
+    { name: 'Male (Healthy)', value: maleCount - maleDisease },
+    { name: 'Male (Disease)', value: maleDisease },
+    { name: 'Female (Healthy)', value: femaleCount - femaleDisease },
+    { name: 'Female (Disease)', value: femaleDisease },
+  ].filter(d => d.value > 0);
+
+  const overallDiseaseData = [
+    { name: 'Healthy', value: totalPatients - heartDiseaseCount },
+    { name: 'Heart Disease', value: heartDiseaseCount }
   ];
-  
-  const vaccineBrandData = [
-    { name: 'CoviShield', value: nationalTotals.covishield },
-    { name: 'Covaxin', value: nationalTotals.covaxin },
-    { name: 'Sputnik V', value: nationalTotals.sputnik },
-  ].filter(d => d.value > 0);
 
-  const ageDemographicData = [
-    { name: '18-44 Years', value: nationalTotals.age18_44 },
-    { name: '45-60 Years', value: nationalTotals.age45_60 },
-    { name: '60+ Years', value: nationalTotals.age60plus },
-  ].filter(d => d.value > 0);
+  const COLORS = ['#8d9f8e', '#b76c5b', '#e0c9a3', '#4a453f'];
+  const PIE_COLORS = ['#637f64', '#b76c5b'];
 
-  const COLORS = ['#637f64', '#b76c5b', '#e0c9a3'];
-  const BRAND_COLORS = ['#3b3631', '#8d9f8e', '#d1cbbb'];
-  const AGE_COLORS = ['#e0c9a3', '#b76c5b', '#4a453f'];
-
-  const formatNumber = (num) => new Intl.NumberFormat('en-IN').format(num);
-  const chartWidth = Math.max(800, allStates.length * 60);
+  const formatNumber = (num) => new Intl.NumberFormat('en-US').format(num);
 
   return (
     <div className="app-container">
       <nav className="top-nav">
         <div className="logo">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m9.182 9.498 4.949 4.95"/><path d="M4.5 16.5 6 15"/><path d="m18 8 1.5-1.5"/>
+            <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
           </svg>
-          VaxTracker India
+          CardioScan Insights
         </div>
         <div className="nav-links">
-          <a href="#dataset" className={activeTab === 'dataset' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('dataset'); }}>Dataset Overview</a>
-          <a href="#statewise" className={activeTab === 'statewise' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('statewise'); }}>Statewise Doses</a>
-          <a href="#gender" className={activeTab === 'gender' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('gender'); }}>Demographics & Data</a>
+          <a href="#overview" className={activeTab === 'overview' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('overview'); }}>Overview</a>
+          <a href="#demographics" className={activeTab === 'demographics' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('demographics'); }}>Demographics</a>
+          <a href="#factors" className={activeTab === 'factors' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('factors'); }}>Risk Factors</a>
+          <a href="#calculator" className={activeTab === 'calculator' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('calculator'); }}>Risk Calculator ✦</a>
+          <a href="#explorer" className={activeTab === 'explorer' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('explorer'); }}>Explorer</a>
           <a href="#download" onClick={handleDownload} aria-label="Download CSV dataset">Download CSV</a>
         </div>
       </nav>
 
       <section className="hero">
-        <span className="tag">Research Phase Complete</span>
-        <h1>Mapping India's Vaccine Journey</h1>
-        <p>A simple mini project for Data Science and Big Data Analysis, designed to explore and visually break down the national vaccination drive.</p>
+        <span className="tag">Dataset Analysis Active</span>
+        <h1>Decoding Heart Disease Risks</h1>
+        <p>A comprehensive data science mini-project analyzing clinical metrics, demographics, and predicting risk factors.</p>
       </section>
 
-      {activeTab === 'dataset' && (
-        <section className="dashboard-content">
-          <div className="section-header">
-            <h2>Dataset Overview</h2>
-            <p>High-level aggregated statistics pulled from the latest reported date in India.</p>
-          </div>
-          
-          <div className="stats-grid">
-            <div className="stat-card">
-              <h3>Total Rows Parsed</h3>
-              <div className="value">{formatNumber(totalRows)}</div>
-            </div>
-            <div className="stat-card">
-              <h3>States & UTs Recorded</h3>
-              <div className="value">{allStates.length}</div>
-            </div>
-            <div className="stat-card">
-              <h3>First Doses (National)</h3>
-              <div className="value">{formatNumber(nationalTotals.firstDose)}</div>
-            </div>
-            <div className="stat-card">
-              <h3>Second Doses (National)</h3>
-              <div className="value">{formatNumber(nationalTotals.secondDose)}</div>
-            </div>
-            <div className="stat-card">
-              <h3>Peak Daily Sessions</h3>
-              <div className="value">{formatNumber(nationalTotals.sessions)}</div>
-            </div>
-            <div className="stat-card">
-              <h3>Peak Active Sites</h3>
-              <div className="value">{formatNumber(nationalTotals.sites)}</div>
-            </div>
-          </div>
-        </section>
+      {/* Global Filters UI - Shown everywhere except Calculator */}
+      {activeTab !== 'calculator' && activeTab !== 'explorer' && (
+        <div className="filters-container">
+          <span style={{ fontWeight: '600', color: '#6d665a' }}>Global Filters:</span>
+          <select value={genderFilter} onChange={(e) => setGenderFilter(e.target.value)}>
+            <option value="All">All Genders</option>
+            <option value="Male">Male Only</option>
+            <option value="Female">Female Only</option>
+          </select>
+          <select value={ageFilter} onChange={(e) => setAgeFilter(e.target.value)}>
+            <option value="All">All Ages</option>
+            <option value="<45">Under 45</option>
+            <option value="45-55">45 - 55</option>
+            <option value="56-65">56 - 65</option>
+            <option value=">65">Over 65</option>
+          </select>
+        </div>
       )}
 
-      {activeTab === 'statewise' && (
-        <section className="dashboard-content">
-          <div className="section-header">
-            <h2>Statewise Vaccination Counts</h2>
-            <p>Comparing vaccination reach across all Indian States and UTs. Scroll horizontally to view all regions.</p>
-          </div>
-          
-          <div className="chart-container">
-            <div className="scrollable-chart">
-              <div style={{ width: chartWidth, height: 450 }}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={allStates}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 100 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e0ddd0" />
-                    <XAxis 
-                      dataKey="state" 
-                      angle={-45} 
-                      textAnchor="end" 
-                      interval={0} 
-                      tick={{fill: '#6d665a', fontSize: 12}} 
-                      tickMargin={10}
-                    />
-                    <YAxis 
-                      tickFormatter={(val) => `${(val / 1000000).toFixed(0)}M`}
-                      tick={{fill: '#6d665a', fontSize: 12}}
-                      axisLine={false}
-                      tickLine={false}
-                    />
-                    <Tooltip 
-                      formatter={(value) => formatNumber(value)}
-                      contentStyle={{ backgroundColor: '#fcfaf5', borderRadius: '8px', border: '1px solid #d1cbbb' }}
-                    />
-                    <Legend verticalAlign="top" height={36} />
-                    <Bar dataKey="firstDose" name="First Dose" fill="#8d9f8e" radius={[4, 4, 0, 0]} />
-                    <Bar dataKey="secondDose" name="Second Dose" fill="#e0c9a3" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
+      {totalPatients === 0 ? (
+        <div className="loader">No records match the current filters.</div>
+      ) : (
+        <>
+          {activeTab === 'overview' && (
+            <section className="dashboard-content">
+              <div className="stats-grid">
+                <div className="stat-card">
+                  <h3>Total Patients</h3>
+                  <div className="value">{formatNumber(totalPatients)}</div>
+                </div>
+                <div className="stat-card">
+                  <h3>Heart Disease Cases</h3>
+                  <div className="value">{formatNumber(heartDiseaseCount)}</div>
+                </div>
+                <div className="stat-card">
+                  <h3>Prevalence Rate</h3>
+                  <div className="value">{((heartDiseaseCount / totalPatients) * 100).toFixed(1)}%</div>
+                </div>
+                <div className="stat-card">
+                  <h3>Avg Age</h3>
+                  <div className="value">{avgAge} yrs</div>
+                </div>
+                <div className="stat-card">
+                  <h3>Avg Cholesterol</h3>
+                  <div className="value">{avgChol} mg/dl</div>
+                </div>
+                <div className="stat-card">
+                  <h3>Avg Blood Pressure</h3>
+                  <div className="value">{avgTrestbps} mmHg</div>
+                </div>
               </div>
-            </div>
-            <div className="chart-title">Vaccination Spikes by Region</div>
-          </div>
-        </section>
-      )}
 
-      {activeTab === 'gender' && (
-        <section className="dashboard-content">
-          <div className="section-header">
-            <h2>Demographics & Logistics Breakdown</h2>
-            <p>Analyzing critical demographic segments and types of vaccines administered nationally.</p>
-          </div>
-          
-          <div className="stats-grid">
-            <div className="stat-card">
-              <h3>Number of Males Vaccinated</h3>
-              <div className="value">{formatNumber(nationalTotals.male)}</div>
-            </div>
-            <div className="stat-card">
-              <h3>Number of Females Vaccinated</h3>
-              <div className="value">{formatNumber(nationalTotals.female)}</div>
-            </div>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
-            <div className="chart-container" style={{ margin: 0 }}>
-              <div style={{ width: '100%', height: 350 }}>
-                <ResponsiveContainer>
-                  <PieChart>
-                    <Pie
-                      data={genderData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={110}
-                      paddingAngle={5}
-                      dataKey="value"
-                      labelLine={false}
-                    >
-                      {genderData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip formatter={(value) => formatNumber(value)} />
-                    <Legend />
-                  </PieChart>
-                </ResponsiveContainer>
+              <div className="chart-container" style={{ marginTop: '2rem' }}>
+                <div style={{ width: '100%', height: 350 }}>
+                  <ResponsiveContainer>
+                    <PieChart>
+                      <Pie
+                        data={overallDiseaseData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={80}
+                        outerRadius={130}
+                        paddingAngle={5}
+                        dataKey="value"
+                        label={({ name, percent }) => `${name} (${(percent * 100).toFixed(1)}%)`}
+                      >
+                        {overallDiseaseData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="chart-title">Overall Population Health Status</div>
               </div>
-              <div className="chart-title">Gender Proportion</div>
-            </div>
+            </section>
+          )}
 
-            <div className="chart-container" style={{ margin: 0 }}>
-              <div style={{ width: '100%', height: 350 }}>
-                <ResponsiveContainer>
-                  <BarChart data={vaccineBrandData} layout="vertical" margin={{ left: 20, right: 100, top: 20, bottom: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#e0ddd0" />
-                    <XAxis type="number" hide />
-                    <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{fill: '#6d665a'}} width={80} />
-                    <Tooltip formatter={(value) => formatNumber(value)} cursor={{fill: '#f7f5ef'}} />
-                    <Bar dataKey="value" fill="#b76c5b" radius={[0, 4, 4, 0]}>
-                      {vaccineBrandData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={BRAND_COLORS[index % BRAND_COLORS.length]} />
-                      ))}
-                      <LabelList dataKey="value" position="right" formatter={(value) => formatNumber(value)} fill="#6d665a" fontSize={13} fontWeight={600} offset={10} />
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
+          {activeTab === 'demographics' && (
+            <section className="dashboard-content">
+              <div className="chart-container">
+                <div style={{ width: '100%', height: 400 }}>
+                  <ResponsiveContainer>
+                    <BarChart data={ageData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e0ddd0" />
+                      <XAxis dataKey="group" tick={{fill: '#6d665a'}} />
+                      <YAxis tick={{fill: '#6d665a'}} axisLine={false} tickLine={false} />
+                      <Tooltip contentStyle={{ backgroundColor: '#fcfaf5', borderRadius: '8px', border: '1px solid #d1cbbb' }} />
+                      <Legend />
+                      <Bar dataKey="Healthy" fill="#8d9f8e" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="Heart Disease" fill="#b76c5b" radius={[4, 4, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="chart-title">Health Status by Age Group</div>
               </div>
-              <div className="chart-title">Brand Distribution (Doses)</div>
-            </div>
-          </div>
 
-          <div className="chart-container">
-            <div style={{ width: '100%', height: 350 }}>
-              <ResponsiveContainer>
-                <PieChart>
-                  <Pie
-                    data={ageDemographicData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={80}
-                    outerRadius={140}
-                    paddingAngle={5}
-                    dataKey="value"
-                    label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
-                    labelLine={true}
-                  >
-                    {ageDemographicData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={AGE_COLORS[index % AGE_COLORS.length]} />
+              <div className="chart-container" style={{ marginTop: '2rem' }}>
+                <div style={{ width: '100%', height: 350 }}>
+                  <ResponsiveContainer>
+                    <PieChart>
+                      <Pie
+                        data={genderData}
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={120}
+                        dataKey="value"
+                        label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                      >
+                        {genderData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="chart-title">Health Status Breakdown by Gender</div>
+              </div>
+            </section>
+          )}
+
+          {activeTab === 'factors' && (
+            <section className="dashboard-content">
+              <div className="chart-container">
+                <div style={{ width: '100%', height: 400 }}>
+                  <ResponsiveContainer>
+                    <BarChart data={cpData} layout="vertical" margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                      <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#e0ddd0" />
+                      <XAxis type="number" hide />
+                      <YAxis dataKey="type" type="category" axisLine={false} tickLine={false} tick={{fill: '#6d665a'}} width={160} />
+                      <Tooltip cursor={{fill: '#f7f5ef'}} />
+                      <Legend verticalAlign="top" height={36} />
+                      <Bar dataKey="Healthy" fill="#8d9f8e" radius={[0, 4, 4, 0]} />
+                      <Bar dataKey="Heart Disease" fill="#b76c5b" radius={[0, 4, 4, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="chart-title">Health Status by Chest Pain Type</div>
+              </div>
+
+              <div className="chart-container" style={{ marginTop: '2rem' }}>
+                <div style={{ width: '100%', height: 400 }}>
+                  <ResponsiveContainer>
+                    <BarChart data={fbsData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e0ddd0" />
+                      <XAxis dataKey="type" tick={{fill: '#6d665a'}} />
+                      <YAxis tick={{fill: '#6d665a'}} axisLine={false} tickLine={false} />
+                      <Tooltip contentStyle={{ backgroundColor: '#fcfaf5', borderRadius: '8px', border: '1px solid #d1cbbb' }} />
+                      <Legend />
+                      <Bar dataKey="Healthy" fill="#8d9f8e" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="Heart Disease" fill="#b76c5b" radius={[4, 4, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="chart-title">Health Status by Fasting Blood Sugar Level</div>
+              </div>
+            </section>
+          )}
+
+          {activeTab === 'calculator' && (
+            <section className="dashboard-content">
+              <div className="section-header">
+                <h2>Predictive Risk Calculator</h2>
+                <p>Input clinical metrics to generate a simulated heart disease probability score based on dataset trends.</p>
+              </div>
+              
+              <form className="risk-form" onSubmit={calculateRisk}>
+                <div className="form-group">
+                  <label>Age</label>
+                  <input type="number" name="age" value={calcValues.age} onChange={handleCalcChange} required />
+                </div>
+                
+                <div className="form-group">
+                  <label>Biological Sex</label>
+                  <select name="sex" value={calcValues.sex} onChange={handleCalcChange}>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label>Chest Pain Type</label>
+                  <select name="cp" value={calcValues.cp} onChange={handleCalcChange}>
+                    <option value="1">Typical Angina</option>
+                    <option value="2">Atypical Angina</option>
+                    <option value="3">Non-anginal Pain</option>
+                    <option value="4">Asymptomatic</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label>Resting Blood Pressure</label>
+                  <input type="number" name="trestbps" value={calcValues.trestbps} onChange={handleCalcChange} required />
+                </div>
+
+                <div className="form-group">
+                  <label>Serum Cholesterol</label>
+                  <input type="number" name="chol" value={calcValues.chol} onChange={handleCalcChange} required />
+                </div>
+
+                <div className="form-group">
+                  <label>Max Heart Rate Achieved</label>
+                  <input type="number" name="thalach" value={calcValues.thalach} onChange={handleCalcChange} required />
+                </div>
+
+                <button type="submit" className="calc-btn">Calculate Risk Probability</button>
+              </form>
+
+              {riskScore !== null && (
+                <div className="risk-result" style={{ borderColor: getRiskColor(riskScore) }}>
+                  <h3>Estimated Heart Disease Risk</h3>
+                  <div className="risk-score-display" style={{ 
+                    color: getRiskColor(riskScore), 
+                    backgroundColor: `${getRiskColor(riskScore)}15` 
+                  }}>
+                    {riskScore}%
+                  </div>
+                  <p style={{ color: '#6d665a', fontSize: '1.1rem' }}>
+                    {riskScore < 30 ? "Low Risk: Metrics are generally within healthy ranges." :
+                     riskScore < 60 ? "Moderate Risk: Some clinical factors indicate elevated risk. Monitor closely." :
+                     "High Risk: Several critical factors indicate a high probability of heart disease."}
+                  </p>
+                </div>
+              )}
+            </section>
+          )}
+
+          {activeTab === 'explorer' && (
+            <section className="dashboard-content">
+              <div className="section-header">
+                <h2>Raw Data Explorer</h2>
+                <p>View the underlying patient records used to generate this dashboard.</p>
+              </div>
+              <div style={{ overflowX: 'auto', background: '#fff', borderRadius: '8px', padding: '1rem', border: '1px solid #e0ddd0', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
+                  <thead>
+                    <tr style={{ borderBottom: '2px solid #e0ddd0', color: '#6d665a' }}>
+                      <th style={{ padding: '12px 8px' }}>Age</th>
+                      <th style={{ padding: '12px 8px' }}>Sex</th>
+                      <th style={{ padding: '12px 8px' }}>Chest Pain</th>
+                      <th style={{ padding: '12px 8px' }}>Blood Pressure</th>
+                      <th style={{ padding: '12px 8px' }}>Cholesterol</th>
+                      <th style={{ padding: '12px 8px' }}>Max Heart Rate</th>
+                      <th style={{ padding: '12px 8px' }}>Diagnosis</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.slice(0, 50).map((row, i) => (
+                      <tr key={i} style={{ borderBottom: '1px solid #f7f5ef' }}>
+                        <td style={{ padding: '12px 8px' }}>{row.age}</td>
+                        <td style={{ padding: '12px 8px' }}>{row.sex_label}</td>
+                        <td style={{ padding: '12px 8px' }}>{row.cp_label}</td>
+                        <td style={{ padding: '12px 8px' }}>{row.trestbps}</td>
+                        <td style={{ padding: '12px 8px' }}>{row.chol}</td>
+                        <td style={{ padding: '12px 8px' }}>{row.thalach}</td>
+                        <td style={{ padding: '12px 8px', fontWeight: 'bold', color: row.target == 1 ? '#b76c5b' : '#8d9f8e' }}>
+                          {row.target_label}
+                        </td>
+                      </tr>
                     ))}
-                  </Pie>
-                  <Tooltip formatter={(value) => formatNumber(value)} />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="chart-title">Age Groups Vaccinated</div>
-          </div>
-        </section>
+                  </tbody>
+                </table>
+                <div style={{ padding: '16px 10px', textAlign: 'center', color: '#6d665a', fontSize: '0.9em' }}>
+                  Showing first 50 records of {data.length} total.
+                </div>
+              </div>
+            </section>
+          )}
+        </>
       )}
     </div>
   );

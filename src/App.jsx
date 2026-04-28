@@ -152,6 +152,16 @@ export default function App() {
     };
   }, [data, genderFilter, ageFilter]);
 
+  const handleDownload = (e) => {
+    e.preventDefault();
+    const link = document.createElement('a');
+    link.href = '/heart_disease.csv';
+    link.download = 'heart_disease_dataset.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const calculateRisk = (e) => {
     e.preventDefault();
     const { age, sex, cp, trestbps, chol, thalach } = calcValues;
